@@ -78,6 +78,13 @@ models.ProjectStep.findByProject = function(project, step) {
 
 
 
+models.User = {};
+
+models.User.findOrCreate = function(params, callback) {
+  callback(false, params);
+};
+
+
 
 
 module.exports = models;
