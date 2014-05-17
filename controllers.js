@@ -49,15 +49,16 @@ controllers.search = function(req, res) {
   });
 };
 
-controllers.project_add = function(req, res) { // POST
-
+controllers.project_create = function(req, res) { 
+  
   if(req.body) {
     models.Project.create(req.body).success(function(project) {
-
+      res.redirect('/project/');
     });
+  } else {
+    res.render('project_create');
   }
 
-  res.render('project_add');
 };
 
 controllers.project_view = function(req, res) {
@@ -134,6 +135,7 @@ controllers.project_step_view = function(req, res) {
   var step = req.params.step;
 
   if(id) {
+
     models.Project.find(id).success(function(project) {
 
       models.ProjectStep.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
