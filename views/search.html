@@ -3,11 +3,16 @@
 {% block content %}
 
     <div class="container">
-
-      {% for item in results %}
-        {% include "project.html" with item %}
-      {% endfor %}
-
+      {% if results %}
+        {% for item in results %}
+          {% include "project_list_item.html" with results %}
+        {% endfor %}
+      {% else %}
+        <h2 class="featurette-heading">Tu búsqueda no arrojó ningún resultado :(</h2>
+        <p class="lead">Animate a crear un tutorial de proyecto para "{{ keywords }}" vos mismo.</p>
+        <a href="#" class="btn btn-success btn-lg" role="button">Publicar</a>
+        <hr class="featurette-divider">
+      {% endif %}
     </div>
 
 {% endblock %}

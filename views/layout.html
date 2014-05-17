@@ -23,6 +23,11 @@
       <link href="css/carousel.css" rel="stylesheet">
       <link href="css/main.css" rel="stylesheet">
     {% endblock %}
+
+    <script type="text/javascript">
+      var config = {};
+      config.baseUrl = '{{ config.baseUrl }}';
+    </script>
   </head>
 
   <body>
@@ -36,19 +41,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Pensa Verde</a>
+          <a class="navbar-brand" href="{{ config.baseUrl }}">Pensa Verde</a>
         </div>
 
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Inicio</a></li>
-            <li><a href="#">Proyectos</a></li>
+            <li class="active"><a href="{{ config.baseUrl }}">Inicio</a></li>
+            <li><a href="{{ config.baseUrl }}search">Proyectos</a></li>
             <li><a href="#">Publicar</a></li>
           </ul>
 
-          <form class="navbar-form navbar-right" role="search">
+          <form id="searchForm" class="navbar-form navbar-right" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Objeto o material">
+              <input type="text" id="keywords" class="form-control" placeholder="Objeto o material" value="{{ keywords }}">
             </div>
             <button type="submit" class="btn btn-default">Buscar</button>
           </form>
@@ -62,14 +67,15 @@
     <!-- START FOOTER -->
     <div class="container">
       <footer>
-        <p class="pull-right"><a href="#">Ir arriba</a></p>
-        <p>Pensá Verde &copy; 2104 &middot; <a href="http://pensaverde.com">www.pensaverde.com</a></p>
+        <p class="pull-right"><a href="#" id="goTop">Ir arriba</a></p>
+        <p>Pensá Verde &copy; 2104 &middot; <a href="{{ config.baseUrl }}">www.pensaverde.com</a></p>
       </footer>
     </div>
     <!-- END FOOTER -->
 
     <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
     {% block foot %}{% endblock %}
   </body>
 </html>
