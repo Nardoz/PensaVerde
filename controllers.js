@@ -9,17 +9,26 @@ models.Slide.getAll = function() {
     image: 'slide_1.jpg',
     title: 'Reciclemos entre todos',
     description: 'Pensá Verde es una plataforma online en la que podemos aprender reciclando entre todos.',
-    button: 'Buscar proyectos'
+    button: {
+      text: 'Buscar proyectos',
+      link: config.baseUrl + 'search'
+    }
   },{
     image: 'slide_2.jpg',
     title: 'Compartí tu experiencia',
     description: 'Publicar un proyecto en Pensá Verde es muy fácil e intuitivo. Podés hacerlo desde una computadora, tableta o celular.',
-    button: 'Publicar un proyecto'
+    button: {
+      text: 'Publicar un proyecto',
+      link: '#'
+    }
   },{
     image: 'slide_3.jpg',
     title: 'No hace falta registrarse',
     description: 'Para ver los proyectos no hace falta registrarse. Y para votar o publicar un proyecto, podés iniciar sesión a través de tu cuenta de Facebook.',
-    button: 'Iniciar sesión ahora'
+    button: {
+      text: 'Iniciar sesión ahora',
+      link: config.baseUrl + 'auth/facebook'
+    }
   }];
 };
 
@@ -86,7 +95,7 @@ controllers.project_edit = function(req, res) { // POST
   if(id) {
 
     if(req.body) {
-      models.ProjectStep.update(req.body).success(function(step) {
+      models.Step.update(req.body).success(function(step) {
 
       });
     }
@@ -114,12 +123,12 @@ controllers.project_step_add = function(req, res) { // POST
     });
 
     if(req.body) {
-      models.ProjectStep.create(req.body).success(function(step) {
+      models.Step.create(req.body).success(function(step) {
 
       });
     }
 
-    models.ProjectStep.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
+    models.Step.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
       res.render('project_step_add', {
         project: project,
         step: currentStep
@@ -144,7 +153,7 @@ controllers.project_step_view = function(req, res) {
 
     models.Project.find(id).success(function(project) {
 
-      models.ProjectStep.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
+      models.Step.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
         res.render('project_step_view', {
           project: project,
           step: currentStep
@@ -168,10 +177,10 @@ controllers.project_step_edit = function(req, res) { // POST
 
     models.Project.find(id).success(function(project) {
 
-      models.ProjectStep.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
+      models.Step.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
 
         if(req.body) {
-          models.ProjectStep.update(req.body).success(function(step) {
+          models.Step.update(req.body).success(function(step) {
 
           });
         }
@@ -198,7 +207,7 @@ controllers.project_step_photo_add = function(req, res) { // POST
   if(id) {
 
     models.Project.find(id).success(function(project) {
-      models.ProjectStep.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
+      models.Step.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
 
         if(req.files) {
 
@@ -207,7 +216,7 @@ controllers.project_step_photo_add = function(req, res) { // POST
             var path = '/uploads/' + id + '_' + step + '_' + stepImage.name;
 
             fs.writeFile(basePath + path, data, function(err) {
-              if(models.ProjectStep.addPhoto(path)) {
+              if(models.Step.addPhoto(path)) {
                 res.json({ status: 'ok' });
               }
             });
