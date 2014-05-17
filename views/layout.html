@@ -51,6 +51,13 @@
             <li class="menu-home"><a href="{{ config.baseUrl }}">Inicio</a></li>
             <li class="menu-projects"><a href="{{ config.baseUrl }}search">Proyectos</a></li>
             <li class="menu-post"><a href="#">Publicar</a></li>
+            <li class="menu-post">
+              {% if passport %}
+                <a id="login" href="#">Iniciar sesión con <spann class="btn btn-success btn-facebook" role="button">f</span></a>
+              {% else %}
+                <a id="logout" href="#">Cerrar sesión de {{ passport.user.firstName }}</a>
+              {% endif %}
+            </li>
           </ul>
 
           <form id="searchForm" class="navbar-form navbar-right" role="search">
