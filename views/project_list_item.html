@@ -4,7 +4,7 @@
     {% if item.introduction %}<p class="lead">{{ item.introduction }}</p>{% endif %}
     {% if item.views %}<h4><span class="glyphicon glyphicon-eye-open"></span> {{ item.views }} Vistas {% endif %}</h4>
     {% if item.favs %}<h4><span class="glyphicon glyphicon-heart"></span> {{ item.favs }} Favoritos {% endif %}</h4>
-    <a href="{{ config.baseUrl }}project/{{ item.id }}/step/intro" class="btn btn-success btn-lg" role="button">Ver tutorial</a>
+    <a href="{{ config.baseUrl }}project/{{ item.id }}/step/intro" class="btn btn-success btn-lg" role="button">Ver proyecto</a>
   </div>
   <div class="col-md-4">
     {% if item.image %}

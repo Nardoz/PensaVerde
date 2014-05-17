@@ -2,6 +2,10 @@ body {
   margin-top: 71px;
 }
 
+.navbar-brand > img {
+  margin-top: -10px;
+}
+
 .carousel {
   margin-top: -20px;
   margin-bottom: 50px;
