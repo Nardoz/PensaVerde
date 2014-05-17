@@ -1,29 +1,14 @@
 
-var models = require('./models');
 var controllers = {};
 
 controllers.index = function(req, res) {
 
+  var slides = models.Slide.getAll();
   var topTen = models.Project.getTopTen();
 
-  res.render('index', { 
-    topTen: topTen 
-  });
-
-};
-
-controllers.search = function(req, res) {
-
-  var keywords = req.param('keywords', '');
-  var results = [];
-
-  if(keywords) {
-    results = models.Project.findAllByKeywords(keywords);
-  }
-
-  res.render('search', {
-    keywords: keywords,
-    results: results
+  res.render('index', {
+    slides: slides,
+    topTen: topTen
   });
 };
 
@@ -191,9 +176,9 @@ controllers.auth_facebook_add = function(accessToken, refreshToken, profile, don
 controllers.account_favs = function(req, res) {
   res.render('account_favs');
 };
+=======
+>>>>>>> 10bb313b7780100b7283cbca39e45ba7f853dbfd
 
-controllers.account_profile = function(req, res) {
-  res.render('account_profile');
 };
 
 module.exports = controllers;
