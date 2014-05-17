@@ -14,11 +14,11 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Project.belongsTo(models.User),
-        User.hasMany(models.Fav)
+        Project.hasMany(models.Fav)
       },
       getTopTen: function(callback) {
         Project.findAll({ 
-          order: 'favs DESC'
+          order: 'favs DESC',
           limit: 10
         }).success(callback);
       }

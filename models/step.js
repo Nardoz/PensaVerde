@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Step.belongsTo(models.Step),
-        User.hasMany(models.Photo)
+        Step.hasMany(models.Photo)
       }
     }
   });
