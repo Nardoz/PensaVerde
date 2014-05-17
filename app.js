@@ -54,3 +54,4 @@ models.sequelize
 process.on('uncaughtException', function(err){
   console.log(err);
 });
+

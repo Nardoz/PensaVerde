@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       },
       getTopTen: function(callback) {
         Project.findAll({ 
-          order: 'favs DESC',
+          //order: 'favs DESC',
           limit: 10
         }).success(callback);
       }
@@ -26,4 +26,4 @@ module.exports = function(sequelize, DataTypes) {
   });
  
   return Project;
-}
+};

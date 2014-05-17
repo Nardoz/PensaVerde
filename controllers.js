@@ -1,16 +1,40 @@
 
-var models = require('./_models');
+var models = require('./models');
 var controllers = {};
+
+// Hardcodeta
+models.Slide = {};
+models.Slide.getAll = function() {
+  return [{
+    image: 'slide_1.jpg',
+    title: 'Reciclemos entre todos',
+    description: 'Pensá Verde es una plataforma online en la que podemos aprender reciclando entre todos.',
+    button: 'Buscar proyectos'
+  },{
+    image: 'slide_2.jpg',
+    title: 'Compartí tu experiencia',
+    description: 'Publicar un proyecto en Pensá Verde es muy fácil e intuitivo. Podés hacerlo desde una computadora, tableta o celular.',
+    button: 'Publicar un proyecto'
+  },{
+    image: 'slide_3.jpg',
+    title: 'No hace falta registrarse',
+    description: 'Para ver los proyectos no hace falta registrarse. Y para votar o publicar un proyecto, podés iniciar sesión a través de tu cuenta de Facebook.',
+    button: 'Iniciar sesión ahora'
+  }];
+};
+
 
 controllers.index = function(req, res) {
 
   var slides = models.Slide.getAll();
-  var topTen = models.Project.getTopTen();
 
-  res.render('index', {
-    slides: slides,
-    topTen: topTen
+  var topTen = models.Project.getTopTen(function(topTen) {
+    res.render('index', {
+      slides: slides,
+      topTen: topTen
+    });
   });
+  
 };
 
 controllers.search = function(req, res) {
@@ -18,7 +42,7 @@ controllers.search = function(req, res) {
   var keywords = req.param('keywords', '');
   var results = [];
 
-  results = models.Project.findAllByKeywords(keywords);
+  results = models.Project.findAll({ where: { title: keywords } });
 
   res.render('search', {
     keywords: keywords,
@@ -176,14 +200,14 @@ controllers.project_step_photo_add = function(req, res) { // POST
 };
 
 controllers.auth_facebook_add = function(accessToken, refreshToken, profile, done) {
-  models.User.findOrCreate({
+  models.User.findByFacebookOrCreate({
     facebookId: profile.id,
     firstName: profile.name.givenName,
     lastName: profile.name.familyName,
     gender: profile.gender,
     email: profile.emails[0].value
-  }, function(err, user) {
-    return done(err, user);
+  }, function(user) {
+    return done(null, user);
   });
 };
 
