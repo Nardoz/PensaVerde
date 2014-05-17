@@ -50,8 +50,8 @@
 }
 
 .product-list-image {
-  max-width: 270px;
-  max-height: 270px;
+  width: 270px;
+  height: 270px;
   background-position: center;
   background-size: cover;
 }
