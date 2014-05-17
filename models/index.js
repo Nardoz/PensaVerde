@@ -1,6 +1,6 @@
 var fs = require('fs'), 
     path = require('path'), 
-    lodash = require('lodash')
+    lodash = require('lodash'),
     Sequelize = require('sequelize'),
     config = require('../config'),
     sequelize = new Sequelize(config.database.database, config.database.username, config.database.password), 
