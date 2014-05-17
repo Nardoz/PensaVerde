@@ -57,7 +57,21 @@ models.Project.getTopTen = function() {
   }];
 };
 models.Project.findAllByKeywords = function(keywords) {
-  return [];
+  return [{
+    id: 1,
+    title: 'Farolitos de frasco',
+    introduction: 'Farolitos decorativos con velas hechos con frascos',
+    image: 'faroles_de_frascos.jpg',
+    views: 10,
+    favs: 5
+  },{
+    id: 1,
+    title: 'Macetas de lata',
+    introduction: 'Latas de conservas utilizadas como macetas',
+    image: 'macetas_de_lata.jpg',
+    views: 20,
+    favs: 15
+  }];
 };
 
 
