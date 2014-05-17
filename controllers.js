@@ -176,8 +176,16 @@ controllers.project_step_photo_add = function(req, res) { // POST
   }
 };
 
-controllers.auth_facebook = function(req, res) { // POST
-  res.render('auth_facebook');
+controllers.auth_facebook_add = function(accessToken, refreshToken, profile, done) {
+  models.User.findOrCreate({ 
+    facebookId: profile.id, 
+    firstName: profile.name.givenName,
+    lastName: profile.name.familyName,
+    gender: profile.gender,
+    email: profile.emails[0].value
+  }, function(err, user) {
+    return done(err, user);
+  });
 };
 
 controllers.account_favs = function(req, res) {
