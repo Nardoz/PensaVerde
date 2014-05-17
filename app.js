@@ -35,7 +35,7 @@ passport.serializeUser(function(user, done) {
   done(null, JSON.stringify(user));
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function(user, done) { console.log(JSON.parse(user)); console.log(JSON.parse(user));
   done(null, JSON.parse(user));
 });
 

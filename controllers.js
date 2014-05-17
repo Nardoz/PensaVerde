@@ -131,6 +131,10 @@ controllers.project_step_add = function(req, res) { // POST
   }
 };
 
+controllers.project_step_create = function(req, res) {
+  res.render('project_step_create');
+};
+
 controllers.project_step_view = function(req, res) {
 
   var id = req.params.id;
