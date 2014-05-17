@@ -1,11 +1,12 @@
 {
+  "baseUrl": "http://localhost:3000/",
   "facebook": {
     "clientID": "736086583078443",
     "clientSecret": "14ce5f922dae201169fe1c629c789336",
     "callbackURL": "http://localhost:3000/auth/facebook/callback",
     "enableProof": false
   },
-  "session": { 
-    "secret": "TheHulkIsGreen" 
+  "session": {
+    "secret": "TheHulkIsGreen"
   }
 }
