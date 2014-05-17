@@ -30,3 +30,13 @@ $('#searchForm').submit(function(){
   event.preventDefault();
   window.location.href = config.baseUrl + 'search?keywords=' + $('#keywords').val();
 });
+
+$('#login').click(function(){
+  window.location.href = config.baseUrl + 'auth/facebook';
+  return false;
+});
+
+
+$('#logout').click(function(){
+  alert('Cerrar sesión');
+});

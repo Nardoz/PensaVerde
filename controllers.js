@@ -31,7 +31,8 @@ controllers.index = function(req, res) {
   var topTen = models.Project.getTopTen(function(topTen) {
     res.render('index', {
       slides: slides,
-      topTen: topTen
+      topTen: topTen,
+      passport: req.session.passport
     });
   });
 
@@ -44,7 +45,8 @@ controllers.search = function(req, res) {
   models.Project.findAll({ where: { title: keywords } }).success(function(results){
     res.render('search', {
       keywords: keywords,
-      results: results
+      results: results,
+      passport: req.session.passport
     });
   });
 };
@@ -234,6 +236,12 @@ controllers.account_profile = function(req, res) {
 
 controllers.account_favs = function(req, res) {
   res.render('account_favs');
+};
+
+controllers.logout = function(req, res) {
+  req.session = null;
+  req.session.destroy();
+  res.redirect('/');
 };
 
 module.exports = controllers;
