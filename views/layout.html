@@ -53,9 +53,9 @@
             <li class="menu-post"><a href="#">Publicar</a></li>
             <li class="menu-post">
               {% if passport %}
-                <a id="login" href="#">Iniciar sesión con <spann class="btn btn-success btn-facebook" role="button">f</span></a>
+                <a id="login" href="#"><span class="btn btn-primary btn-facebook" role="button">f</span> Iniciar sesión</a>
               {% else %}
-                <a id="logout" href="#">Cerrar sesión de {{ passport.user.firstName }}</a>
+                <a id="logout" href="#"><span class="btn btn-primary btn-facebook" role="button">f</span> Cerrar sesión de {{ passport.user.firstName }}</a>
               {% endif %}
             </li>
           </ul>
