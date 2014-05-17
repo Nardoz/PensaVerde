@@ -1,39 +1,9 @@
-.nav.navbar-nav.pull-right {
-  margin-right: 15px;
-}
-
-.navbar-inverse {
-  background-color: #FFD300;
-  border-color: #C5A300;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-  color: #55480c;
-}
-
-.navbar-inverse .navbar-brand {
-  color: #55480c;
-  font-weight: bold;
-}
-
-.navbar-inverse .navbar-nav > .active > a,
-.navbar-inverse .navbar-nav > .active > a:hover,
-.navbar-inverse .navbar-nav > .active > a:focus {
-  color: #fff;
-  background-color: #E6BE00;
-}
-
-.logo-gcaba {
-  padding-top: 6px;
-  padding-left: 0;
-  margin-left: 0 !important;
-}
-
-.logo-gcaba > img {
-  height: 40px;
+body {
+  margin-top: 71px;
 }
 
 .carousel {
+  margin-top: -20px;
   margin-bottom: 50px;
 }
 
@@ -41,24 +11,24 @@
   background-position: center;
 }
 
-#searchForm .form-group {
-  margin-bottom: 0;
-}
-
-#searchForm .glyphicon {
-  top: 8px;
-}
-
-.product-list-image {
-  max-width: 270px;
-  max-height: 270px;
+.featurette .image {
+  width: 100%;
+  max-width: 370px;
   background-position: center;
   background-size: cover;
+}
+
+.featurette .dummy {
+  padding-top: 100%;
+}
+
+.featurette .btn{
+  margin-bottom: 15px;
 }
 
 
 @media (min-width: 992px) {
   .featurette-heading {
-    margin-top: 30px;
+    margin-top: 50px;
   }
 }

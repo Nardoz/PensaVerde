@@ -18,9 +18,7 @@ controllers.search = function(req, res) {
   var keywords = req.param('keywords', '');
   var results = [];
 
-  if(keywords) {
-    results = models.Project.findAllByKeywords(keywords);
-  }
+  results = models.Project.findAllByKeywords(keywords);
 
   res.render('search', {
     keywords: keywords,
@@ -49,11 +47,11 @@ controllers.project_view = function(req, res) {
   } else {
     res.send(404, 'Not found');
   }
-  
+
 };
 
 controllers.project_edit = function(req, res) { // POST
-  
+
   var id = req.params.id;
 
   if(id) {
@@ -148,7 +146,7 @@ controllers.project_step_edit = function(req, res) { // POST
 };
 
 controllers.project_step_photo_add = function(req, res) { // POST
-  
+
   var id = req.params.id;
   var step = req.params.step;
 
@@ -160,9 +158,9 @@ controllers.project_step_photo_add = function(req, res) { // POST
     if(req.files) {
 
       fs.readFile(req.files.stepImage.path, function(err, data) {
-        var basePath = __dirname + '/public'; 
+        var basePath = __dirname + '/public';
         var path = '/uploads/' + id + '_' + step + '_' + stepImage.name;
-        
+
         fs.writeFile(basePath + path, data, function(err) {
           if(models.ProjectStep.addPhoto(path)) {
             res.json({ status: 'ok' });
@@ -178,8 +176,8 @@ controllers.project_step_photo_add = function(req, res) { // POST
 };
 
 controllers.auth_facebook_add = function(accessToken, refreshToken, profile, done) {
-  models.User.findOrCreate({ 
-    facebookId: profile.id, 
+  models.User.findOrCreate({
+    facebookId: profile.id,
     firstName: profile.name.givenName,
     lastName: profile.name.familyName,
     gender: profile.gender,
