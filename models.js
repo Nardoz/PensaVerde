@@ -1,11 +1,5 @@
-
-var models = {};
-
-
-models.Slide = {};
-
-models.Slide.getAll = function() {
-  return [{
+var test = {
+  slides: [{
     image: 'slide_1.jpg',
     title: 'Reciclemos entre todos',
     description: 'Pensá Verde es una plataforma online en la que podemos aprender reciclando entre todos.',
@@ -20,7 +14,33 @@ models.Slide.getAll = function() {
     title: 'No hace falta registrarse',
     description: 'Para ver los proyectos no hace falta registrarse. Y para votar o publicar un proyecto, podés iniciar sesión a través de tu cuenta de Facebook.',
     button: 'Iniciar sesión ahora'
-  }];
+  }],
+
+  projects: [{
+    id: 1,
+    title: 'Farolitos de frasco',
+    introduction: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea.',
+    image: 'faroles_de_frascos.jpg',
+    views: 10,
+    favs: 5
+  },{
+    id: 2,
+    title: 'Macetas de lata',
+    introduction: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea.',
+    image: 'macetas_de_lata.jpg',
+    views: 20,
+    favs: 15
+  }]
+};
+
+
+var models = {};
+
+
+models.Slide = {};
+
+models.Slide.getAll = function() {
+  return test.slides;
 };
 
 
@@ -40,38 +60,10 @@ models.Project.findById = function(id) {
 };
 
 models.Project.getTopTen = function() {
-  return [{
-    id: 1,
-    title: 'Farolitos de frasco',
-    introduction: 'Farolitos decorativos con velas hechos con frascos',
-    image: 'faroles_de_frascos.jpg',
-    views: 10,
-    favs: 5
-  },{
-    id: 1,
-    title: 'Macetas de lata',
-    introduction: 'Latas de conservas utilizadas como macetas',
-    image: 'macetas_de_lata.jpg',
-    views: 20,
-    favs: 15
-  }];
+  return test.projects;
 };
 models.Project.findAllByKeywords = function(keywords) {
-  return [{
-    id: 1,
-    title: 'Farolitos de frasco',
-    introduction: 'Farolitos decorativos con velas hechos con frascos',
-    image: 'faroles_de_frascos.jpg',
-    views: 10,
-    favs: 5
-  },{
-    id: 1,
-    title: 'Macetas de lata',
-    introduction: 'Latas de conservas utilizadas como macetas',
-    image: 'macetas_de_lata.jpg',
-    views: 20,
-    favs: 15
-  }];
+  return test.projects;
 };
 
 
