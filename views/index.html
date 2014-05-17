@@ -1,10 +1,5 @@
 {% extends 'layout.html' %}
 
-{% block head %}
-  <link href="css/carousel.css" rel="stylesheet">
-  <link href="css/main.css" rel="stylesheet">
-{% endblock %}
-
 {% block content %}
 
   <!-- START CAROUSEL -->
@@ -23,7 +18,7 @@
             <div class="carousel-caption">
               {% if item.title %}<h1>{{ item.title }}</h1>{% endif %}
               {% if item.description %}<p>{{ item.description }}</p>{% endif %}
-              {% if item.button %}<p><a class="btn btn-lg btn-primary" href="#" role="button">{{ item.button }}</a></p>{% endif %}
+              {% if item.button %}<p><a class="btn btn-lg btn-default" href="#" role="button">{{ item.button }}</a></p>{% endif %}
             </div>
           </div>
         </div>
@@ -35,19 +30,6 @@
   <!-- END CAROUSEL -->
 
     <div class="container marketing">
-
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <form id="searchForm" role="form">
-            <div class="form-group has-success has-feedback">
-              <input type="text" id="searchField" class="form-control input-lg" placeholder="Buscar objeto o material a reciclar">
-              <span class="glyphicon glyphicon-search form-control-feedback"></span>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
 
       {% for item in topTen %}
         {% include "project.html" with item %}

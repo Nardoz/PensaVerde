@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="container">
+
+      {% for item in results %}
+        {% include "project.html" with item %}
+      {% endfor %}
+
+    </div>
+
+{% endblock %}
