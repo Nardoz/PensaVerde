@@ -4,7 +4,8 @@ var express = require('express'),
     morgan  = require('morgan'),
     serveStatic = require('serve-static'),
     http = require('http'),
-    swig = require('swig');
+    swig = require('swig'),
+    routes = require('./routes');
 
 
 app.engine('html', swig.renderFile);
@@ -13,13 +14,11 @@ app.set('views', __dirname + '/views');
 app.set('view cache', false);
 app.use(morgan('dev'));
 app.use(bodyParser());
-app.use(serveStatic(__dirname + '/public/app'));
+app.use(serveStatic(__dirname + '/public'));
 
 swig.setDefaults({ cache: false });
 
-app.get('/', function (req, res) {
-  res.render('index');
-});
+routes(app);
 
 app.listen(3000);
 
