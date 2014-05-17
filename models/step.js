@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Step.belongsTo(models.Step),
+        Step.belongsTo(models.Project),
         Step.hasMany(models.Photo)
       }
     }
