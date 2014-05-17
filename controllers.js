@@ -1,5 +1,5 @@
 
-var models = require('./models');
+var models = require('./_models');
 var controllers = {};
 
 controllers.index = function(req, res) {

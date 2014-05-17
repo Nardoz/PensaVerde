@@ -7,5 +7,11 @@
   },
   "session": { 
     "secret": "TheHulkIsGreen" 
+  },
+  "database": {
+    "hostname": "localhost",
+    "database": "pensaverde",
+    "username": "root",
+    "password": null
   }
 }

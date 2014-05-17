@@ -12,7 +12,8 @@ var express = require('express'),
     FacebookStrategy = require('passport-facebook').Strategy,
     config = require('./config'),
     controllers = require('./controllers'),
-    routes = require('./routes');
+    routes = require('./routes'),
+    models = require('./models');
 
 
 app.engine('html', swig.renderFile);
@@ -40,7 +41,15 @@ passport.deserializeUser(function(user, done) {
 
 routes(app, passport);
 
-app.listen(3000);
+models.sequelize
+  .sync({ force: true })
+  .complete(function(err) {
+    if(err) {
+      throw err[0];
+    } else {
+      app.listen(3000);
+    }
+  });
 
 process.on('uncaughtException', function(err){
   console.log(err);
