@@ -9,6 +9,7 @@ var express = require('express'),
     http = require('http'),
     swig = require('swig')
     passport = require('passport'),
+    socketio = require('socket.io'),
     FacebookStrategy = require('passport-facebook').Strategy,
     config = require('./config'),
     controllers = require('./controllers'),
@@ -45,9 +46,23 @@ models.sequelize.sync().complete(function(err) {
   if(err) {
     throw err[0];
   } else {
-    app.listen(3000);
+    var server = app.listen(3000);
+    var io = socketio.listen(server);
+
+    var sess = '';
+
+    socket.on('session.start', function(session) {
+      sess = session;
+    });
+
+    socket.on('photo.new', function(photo) {
+      io.sockets.in(sess).emit('photo.shownew', photo);
+    });
+
   }
 });
+
+
 
 process.on('uncaughtException', function(err){
   console.log(err);

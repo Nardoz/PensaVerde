@@ -85,6 +85,17 @@
     <script src="{{ config.baseUrl }}js/jquery-2.1.1.min.js"></script>
     <script src="{{ config.baseUrl }}js/bootstrap.min.js"></script>
     <script src="{{ config.baseUrl }}js/main.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect();
+      socket.on('connect', function() {
+        socket.emit('session.start', 1234);
+        socket.emit('photo.new', '/images/slide_1.jpg');
+      });
+      socket.on('photo.shownew', function(photo) {
+        console.log(photo);
+      });
+    </script>
     {% block foot %}{% endblock %}
   </body>
 </html>
