@@ -49,27 +49,10 @@
 
       <hr class="featurette-divider">
 
-
       {% for item in topTen %}
-        <div class="row featurette">
-          <div class="col-md-9">
-            {% if item.title %}<h2 class="featurette-heading">{{ item.title }}</h2>{% endif %}
-            {% if item.introduction %}<p class="lead">{{ item.introduction }}</p>{% endif %}
-            {% if item.views %}<h4><span class="glyphicon glyphicon-eye-open"></span> {{ item.views }} Vistas {% endif %}</h4>
-            {% if item.favs %}<h4><span class="glyphicon glyphicon-heart"></span> {{ item.favs }} Favoritos {% endif %}</h4>
-          </div>
-          <div class="col-md-3">
-            {% if item.image %}<div class="product-list-image" style="background-image: url('uploads/projects/images/{{ item.image }}');"></div>{% endif %}
-          </div>
-        </div>
-
-        <hr class="featurette-divider">
+        {% include "project.html" with item %}
       {% endfor %}
 
     </div>
 
-{% endblock %}
-
-{% block foot %}
-  <script src="js/docs.min.js"></script>
 {% endblock %}
