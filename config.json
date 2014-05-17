@@ -6,7 +6,13 @@
     "callbackURL": "http://localhost:3000/auth/facebook/callback",
     "enableProof": false
   },
-  "session": {
-    "secret": "TheHulkIsGreen"
+  "session": { 
+    "secret": "TheHulkIsGreen" 
+  },
+  "database": {
+    "hostname": "localhost",
+    "database": "pensaverde",
+    "username": "root",
+    "password": "q2w3e4"
   }
 }
