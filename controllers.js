@@ -4,7 +4,7 @@ var controllers = {};
 
 controllers.index = function(req, res) {
 
-  var topTen = models.Tutorial.getTopTen();
+  var topTen = models.Project.getTopTen();
 
   res.render('index', { 
     topTen: topTen 
@@ -18,7 +18,7 @@ controllers.search = function(req, res) {
   var results = [];
 
   if(keywords) {
-    results = models.Tutorial.findAllByKeywords(keywords);
+    results = models.Project.findAllByKeywords(keywords);
   }
 
   res.render('search', {
@@ -27,46 +27,46 @@ controllers.search = function(req, res) {
   });
 };
 
-controllers.tutorial_add = function(req, res) { // POST
+controllers.project_add = function(req, res) { // POST
 
   if(req.body) {
-    if(models.Tutorial.create(req.body)) {
+    if(models.Project.create(req.body)) {
 
     }
   }
 
-  res.render('tutorial_add');
+  res.render('project_add');
 };
 
-controllers.tutorial_view = function(req, res) {
+controllers.project_view = function(req, res) {
 
   var id = req.params.id;
 
   if(id) {
-    var tutorial = models.Tutorial.findById(id);
-    res.redirect('/tutorial/' + id + '/step/intro');
+    var project = models.Project.findById(id);
+    res.redirect('/project/' + id + '/step/intro');
   } else {
     res.send(404, 'Not found');
   }
   
 };
 
-controllers.tutorial_edit = function(req, res) { // POST
+controllers.project_edit = function(req, res) { // POST
   
   var id = req.params.id;
 
   if(id) {
 
     if(req.body) {
-      if(models.TutorialStep.update(req.body)) {
+      if(models.ProjectStep.update(req.body)) {
 
       }
     }
 
-    var tutorial = models.Tutorial.findById(id);
+    var project = models.Project.findById(id);
 
-    res.render('tutorial_edit', {
-      tutorial: tutorial
+    res.render('project_edit', {
+      project: project
     });
 
   } else {
@@ -75,24 +75,24 @@ controllers.tutorial_edit = function(req, res) { // POST
 
 };
 
-controllers.tutorial_step_add = function(req, res) { // POST
+controllers.project_step_add = function(req, res) { // POST
   var id = req.params.id;
   var step = req.params.step;
 
   if(id) {
 
-    var tutorial = models.Tutorial.findById(id);
+    var project = models.Project.findById(id);
 
     if(req.body) {
-      if(models.TutorialStep.create(req.body)) {
+      if(models.ProjectStep.create(req.body)) {
 
       }
     }
 
-    var currentStep = models.TutorialStep.findByTutorial(tutorial, step);
+    var currentStep = models.ProjectStep.findByProject(project, step);
 
-    res.render('tutorial_step_add', {
-      tutorial: tutorial,
+    res.render('project_step_add', {
+      project: project,
       step: currentStep
     });
 
@@ -101,17 +101,17 @@ controllers.tutorial_step_add = function(req, res) { // POST
   }
 };
 
-controllers.tutorial_step_view = function(req, res) {
+controllers.project_step_view = function(req, res) {
 
   var id = req.params.id;
   var step = req.params.step;
 
   if(id) {
-    var tutorial = models.Tutorial.findById(id);
-    var currentStep = models.TutorialStep.findByTutorial(tutorial, step);
+    var project = models.Project.findById(id);
+    var currentStep = models.ProjectStep.findByProject(project, step);
 
-    res.render('tutorial_step_view', {
-      tutorial: tutorial,
+    res.render('project_step_view', {
+      project: project,
       step: currentStep
     });
   } else {
@@ -120,24 +120,24 @@ controllers.tutorial_step_view = function(req, res) {
 
 };
 
-controllers.tutorial_step_edit = function(req, res) { // POST
+controllers.project_step_edit = function(req, res) { // POST
 
   var id = req.params.id;
   var step = req.params.step;
 
   if(id) {
 
-    var tutorial = models.Tutorial.findById(id);
-    var currentStep = models.TutorialStep.findByTutorial(tutorial, step);
+    var project = models.Project.findById(id);
+    var currentStep = models.ProjectStep.findByProject(project, step);
 
     if(req.body) {
-      if(models.TutorialStep.update(req.body)) {
+      if(models.ProjectStep.update(req.body)) {
 
       }
     }
 
-    res.render('tutorial_step_edit', {
-      tutorial: tutorial,
+    res.render('project_step_edit', {
+      project: project,
       step: currentStep
     });
 
@@ -146,15 +146,15 @@ controllers.tutorial_step_edit = function(req, res) { // POST
   }
 };
 
-controllers.tutorial_step_photo_add = function(req, res) { // POST
+controllers.project_step_photo_add = function(req, res) { // POST
   
   var id = req.params.id;
   var step = req.params.step;
 
   if(id) {
 
-    var tutorial = models.Tutorial.findById(id);
-    var currentStep = models.TutorialStep.findByTutorial(tutorial, step);
+    var project = models.Project.findById(id);
+    var currentStep = models.ProjectStep.findByProject(project, step);
 
     if(req.files) {
 
@@ -163,7 +163,7 @@ controllers.tutorial_step_photo_add = function(req, res) { // POST
         var path = '/uploads/' + id + '_' + step + '_' + stepImage.name;
         
         fs.writeFile(basePath + path, data, function(err) {
-          if(models.TutorialStep.addPhoto(path)) {
+          if(models.ProjectStep.addPhoto(path)) {
             res.json({ status: 'ok' });
           }
         });

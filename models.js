@@ -2,40 +2,40 @@
 var models = {};
 
 
-models.Tutorial = {};
+models.Project = {};
 
-models.Tutorial.create = function(body) {
-
-};
-
-models.Tutorial.update = function(body) {
+models.Project.create = function(body) {
 
 };
 
-models.Tutorial.findById = function(id) {
+models.Project.update = function(body) {
+
+};
+
+models.Project.findById = function(id) {
   return {};
 };
 
-models.Tutorial.getTopTen = function() {
+models.Project.getTopTen = function() {
   return {};
 };
-models.Tutorial.findAllByKeywords = function(keywords) {
+models.Project.findAllByKeywords = function(keywords) {
   return [];
 };
 
 
 
-models.TutorialStep = {};
+models.ProjectStep = {};
 
-models.TutorialStep.create = function(body) {
+models.ProjectStep.create = function(body) {
   return {};
 };
 
-models.TutorialStep.update = function(body) {
+models.ProjectStep.update = function(body) {
   return {};
 };
 
-models.TutorialStep.findByTutorial = function(tutorial, step) {
+models.ProjectStep.findByProject = function(project, step) {
   return {};
 };
 
