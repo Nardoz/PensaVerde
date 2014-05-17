@@ -42,7 +42,7 @@ controllers.search = function(req, res) {
 
   var keywords = req.param('keywords', '');
 
-  models.Project.findAll({ where: { title: keywords } }).success(function(results){
+  models.Project.findAll({ where: ["title LIKE ?", '%'+keywords+'%'] }).success(function(results){
     res.render('search', {
       keywords: keywords,
       results: results,
