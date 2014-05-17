@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="container">
-      {% if results %}
+      {% if results.length %}
         {% for item in results %}
           {% include "project_list_item.html" with results %}
         {% endfor %}

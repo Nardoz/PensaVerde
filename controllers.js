@@ -34,19 +34,18 @@ controllers.index = function(req, res) {
       topTen: topTen
     });
   });
-  
+
 };
 
 controllers.search = function(req, res) {
 
   var keywords = req.param('keywords', '');
-  var results = [];
 
-  results = models.Project.findAll({ where: { title: keywords } });
-
-  res.render('search', {
-    keywords: keywords,
-    results: results
+  models.Project.findAll({ where: { title: keywords } }).success(function(results){
+    res.render('search', {
+      keywords: keywords,
+      results: results
+    });
   });
 };
 
@@ -70,7 +69,7 @@ controllers.project_view = function(req, res) {
     var project = models.Project.find(id).success(function(project) {
       res.redirect('/project/' + id + '/step/intro');
     });
-    
+
   } else {
     res.send(404, 'Not found');
   }
@@ -145,7 +144,7 @@ controllers.project_step_view = function(req, res) {
       });
 
     });
-    
+
   } else {
     res.send(404, 'Not found');
   }
