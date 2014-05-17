@@ -17,7 +17,7 @@ var express = require('express'),
 
 
 app.engine('html', swig.renderFile);
-app.set('view engine', 'html');
+app.set('view engine', 'html'); 
 app.set('views', __dirname + '/views');
 app.set('view cache', false);
 app.use(morgan('dev'));
@@ -41,15 +41,13 @@ passport.deserializeUser(function(user, done) {
 
 routes(app, passport);
 
-models.sequelize
-  .sync({ force: true })
-  .complete(function(err) {
-    if(err) {
-      throw err[0];
-    } else {
-      app.listen(3000);
-    }
-  });
+models.sequelize.sync().complete(function(err) {
+  if(err) {
+    throw err[0];
+  } else {
+    app.listen(3000);
+  }
+});
 
 process.on('uncaughtException', function(err){
   console.log(err);
