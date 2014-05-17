@@ -53,9 +53,9 @@ controllers.search = function(req, res) {
 controllers.project_add = function(req, res) { // POST
 
   if(req.body) {
-    if(models.Project.create(req.body)) {
+    models.Project.create(req.body).success(function(project) {
 
-    }
+    });
   }
 
   res.render('project_add');
@@ -66,8 +66,11 @@ controllers.project_view = function(req, res) {
   var id = req.params.id;
 
   if(id) {
-    var project = models.Project.findById(id);
-    res.redirect('/project/' + id + '/step/intro');
+
+    var project = models.Project.find(id).success(function(project) {
+      res.redirect('/project/' + id + '/step/intro');
+    });
+    
   } else {
     res.send(404, 'Not found');
   }
@@ -81,15 +84,15 @@ controllers.project_edit = function(req, res) { // POST
   if(id) {
 
     if(req.body) {
-      if(models.ProjectStep.update(req.body)) {
+      models.ProjectStep.update(req.body).success(function(step) {
 
-      }
+      });
     }
 
-    var project = models.Project.findById(id);
-
-    res.render('project_edit', {
-      project: project
+    models.Project.find(id).success(function(project) {
+      res.render('project_edit', {
+        project: project
+      });
     });
 
   } else {
@@ -104,19 +107,21 @@ controllers.project_step_add = function(req, res) { // POST
 
   if(id) {
 
-    var project = models.Project.findById(id);
+    models.Project.find(id).success(function(project) {
+
+    });
 
     if(req.body) {
-      if(models.ProjectStep.create(req.body)) {
+      models.ProjectStep.create(req.body).success(function(step) {
 
-      }
+      });
     }
 
-    var currentStep = models.ProjectStep.findByProject(project, step);
-
-    res.render('project_step_add', {
-      project: project,
-      step: currentStep
+    models.ProjectStep.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
+      res.render('project_step_add', {
+        project: project,
+        step: currentStep
+      });
     });
 
   } else {
@@ -130,13 +135,17 @@ controllers.project_step_view = function(req, res) {
   var step = req.params.step;
 
   if(id) {
-    var project = models.Project.findById(id);
-    var currentStep = models.ProjectStep.findByProject(project, step);
+    models.Project.find(id).success(function(project) {
 
-    res.render('project_step_view', {
-      project: project,
-      step: currentStep
+      models.ProjectStep.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
+        res.render('project_step_view', {
+          project: project,
+          step: currentStep
+        });
+      });
+
     });
+    
   } else {
     res.send(404, 'Not found');
   }
@@ -150,18 +159,23 @@ controllers.project_step_edit = function(req, res) { // POST
 
   if(id) {
 
-    var project = models.Project.findById(id);
-    var currentStep = models.ProjectStep.findByProject(project, step);
+    models.Project.find(id).success(function(project) {
 
-    if(req.body) {
-      if(models.ProjectStep.update(req.body)) {
+      models.ProjectStep.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
 
-      }
-    }
+        if(req.body) {
+          models.ProjectStep.update(req.body).success(function(step) {
 
-    res.render('project_step_edit', {
-      project: project,
-      step: currentStep
+          });
+        }
+
+        res.render('project_step_edit', {
+          project: project,
+          step: currentStep
+        });
+
+      });
+
     });
 
   } else {
@@ -176,24 +190,25 @@ controllers.project_step_photo_add = function(req, res) { // POST
 
   if(id) {
 
-    var project = models.Project.findById(id);
-    var currentStep = models.ProjectStep.findByProject(project, step);
+    models.Project.find(id).success(function(project) {
+      models.ProjectStep.find({ where: { projectId: project.id, step: step }}).success(function(currentStep) {
 
-    if(req.files) {
+        if(req.files) {
 
-      fs.readFile(req.files.stepImage.path, function(err, data) {
-        var basePath = __dirname + '/public';
-        var path = '/uploads/' + id + '_' + step + '_' + stepImage.name;
+          fs.readFile(req.files.stepImage.path, function(err, data) {
+            var basePath = __dirname + '/public';
+            var path = '/uploads/' + id + '_' + step + '_' + stepImage.name;
 
-        fs.writeFile(basePath + path, data, function(err) {
-          if(models.ProjectStep.addPhoto(path)) {
-            res.json({ status: 'ok' });
-          }
-        });
+            fs.writeFile(basePath + path, data, function(err) {
+              if(models.ProjectStep.addPhoto(path)) {
+                res.json({ status: 'ok' });
+              }
+            });
+          });
+        }
       });
-    }
+    });
 
-    res.json({ status: 'failed' });
   } else {
     res.json({ status: 'failed' });
   }
