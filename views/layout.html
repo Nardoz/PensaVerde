@@ -9,7 +9,7 @@
 
     <title>{% block title %}Pensá Verde{% endblock %}</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ config.baseUrl }}css/bootstrap.min.css" rel="stylesheet">
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -20,8 +20,8 @@
     <![endif]-->
 
     {% block head %}
-      <link href="css/carousel.css" rel="stylesheet">
-      <link href="css/main.css" rel="stylesheet">
+      <link href="{{ config.baseUrl }}css/carousel.css" rel="stylesheet">
+      <link href="{{ config.baseUrl }}css/main.css" rel="stylesheet">
     {% endblock %}
 
     <script type="text/javascript">
@@ -73,9 +73,9 @@
     </div>
     <!-- END FOOTER -->
 
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{{ config.baseUrl }}js/jquery-2.1.1.min.js"></script>
+    <script src="{{ config.baseUrl }}js/bootstrap.min.js"></script>
+    <script src="{{ config.baseUrl }}js/main.js"></script>
     {% block foot %}{% endblock %}
   </body>
 </html>
