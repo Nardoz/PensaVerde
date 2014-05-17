@@ -49,6 +49,12 @@
   top: 8px;
 }
 
+.product-list-image {
+  width: 270px;
+  height: 270px;
+  background-position: center;
+  background-size: cover;
+}
 
 
 @media (min-width: 992px) {
